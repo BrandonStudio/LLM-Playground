@@ -277,14 +277,14 @@ export type OpenAIModel = (typeof openAIModels)[number];
 export type AnthropicModel = (typeof anthropicModels)[number];
 export type VertexAIModel = (typeof vertexAIModels)[number];
 
-export const supportedModels = {
+export const supportedModels: Record<LLMAdapter, readonly string[]> = {
   [LLMAdapter.Anthropic]: anthropicModels,
   [LLMAdapter.OpenAI]: openAIModels,
   [LLMAdapter.VertexAI]: vertexAIModels,
   [LLMAdapter.GoogleAIStudio]: googleAIStudioModels,
   [LLMAdapter.Azure]: [],
   [LLMAdapter.Bedrock]: [],
-} as const;
+};
 
 // Database types (simplified for localStorage)
 export type LlmSchema = {
