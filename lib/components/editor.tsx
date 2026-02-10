@@ -9,6 +9,8 @@ interface CodeMirrorEditorProps {
   disabled?: boolean;
   mode?: string; // For future compatibility with CodeMirror
   minHeight?: number; // For future compatibility with CodeMirror
+  editable?: boolean; // For future compatibility with CodeMirror
+  lineNumbers?: boolean; // For future compatibility with CodeMirror
 }
 
 export function CodeMirrorEditor({
@@ -18,6 +20,7 @@ export function CodeMirrorEditor({
   className,
   disabled,
   minHeight,
+  editable = true,
 }: CodeMirrorEditorProps) {
   const style = minHeight ? { minHeight: `${minHeight}px` } : undefined;
   
@@ -27,7 +30,7 @@ export function CodeMirrorEditor({
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
       className={className}
-      disabled={disabled}
+      disabled={disabled || !editable}
       rows={10}
       style={style}
     />

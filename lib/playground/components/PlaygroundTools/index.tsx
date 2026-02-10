@@ -4,7 +4,7 @@ import { usePlaygroundContext } from "@/lib/playground/context";
 import { Button } from "@/lib/components/ui/button";
 import { ScrollArea } from "@/lib/components/ui/scroll-area";
 import { PlusIcon, PencilIcon, MinusCircle, WrenchIcon } from "lucide-react";
-import { type LlmTool } from "@prisma/client";
+import { type LlmTool } from "@/lib/shared/types/llm";
 import { api } from "@/lib/utils/api";
 import useProjectIdFromURL from "@/lib/hooks/useProjectIdFromURL";
 import { CreateOrEditLLMToolDialog } from "@/lib/playground/components/CreateOrEditLLMToolDialog";
@@ -33,7 +33,7 @@ export const PlaygroundToolsPopover = () => {
       enabled: Boolean(projectId),
       staleTime: 1000 * 60 * 5, // 5 minutes
     },
-  );
+  ) as { data: LlmTool[] };
 
   const handleSelectTool = (selectedLLMTool: LlmTool) => {
     setTools((prev: PlaygroundTool[]) => {
@@ -153,7 +153,7 @@ export const PlaygroundTools = () => {
       enabled: Boolean(projectId),
       staleTime: 1000 * 60 * 5, // 5 minutes
     },
-  );
+  ) as { data: LlmTool[] };
 
   const isToolSaved = useCallback(
     (tool: PlaygroundTool) => {

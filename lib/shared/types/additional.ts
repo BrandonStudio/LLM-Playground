@@ -16,6 +16,8 @@ export type Observation = {
   input?: unknown;
   output?: unknown;
   metadata?: Record<string, unknown>;
+  model?: string;
+  modelParameters?: unknown;
 };
 
 export type Prompt = {

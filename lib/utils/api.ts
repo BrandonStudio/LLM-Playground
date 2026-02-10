@@ -79,6 +79,9 @@ export const api = {
     all: {
       useQuery: () => ({ data: [] }),
     },
+    getAll: {
+      useQuery: (_args?: any, _options?: any) => ({ data: [] }),
+    },
     create: {
       useMutation: () => ({
         mutateAsync: async (args: any) => createSchemaStub(args),
@@ -122,6 +125,9 @@ export const api = {
   llmTools: {
     all: {
       useQuery: () => ({ data: [] }),
+    },
+    getAll: {
+      useQuery: (_args?: any, _options?: any) => ({ data: [] }),
     },
     create: {
       useMutation: () => ({

@@ -1,4 +1,4 @@
-import { Divider } from "@tremor/react";
+import { Divider } from "@/lib/components/ui/divider";
 
 import { usePlaygroundContext } from "../context";
 import { PromptVariableComponent } from "./PromptVariableComponent";

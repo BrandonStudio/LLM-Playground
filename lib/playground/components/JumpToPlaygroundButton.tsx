@@ -35,6 +35,7 @@ import {
   type PlaceholderMessage,
   PromptType,
   isGenerationLike,
+  LLMAdapter,
 } from "@/lib/shared";
 import { normalizeInput, normalizeOutput } from "@/lib/utils/chatml";
 import { extractTools } from "@/lib/utils/chatml";
@@ -74,7 +75,7 @@ export const JumpToPlaygroundButton: React.FC<JumpToPlaygroundButtonProps> = (
   props,
 ) => {
   const router = useRouter();
-  const capture = usePostHogClientCapture();
+  const { capture } = usePostHogClientCapture();
   const projectId = useProjectIdFromURL();
   const { addWindowWithId, clearAllCache } = usePersistedWindowIds();
   const [capturedState, setCapturedState] = useState<PlaygroundCache>(null);
@@ -264,11 +265,11 @@ const parsePrompt = (
 
     return {
       messages: [
-        createEmptyMessage({
-          type: ChatMessageType.System,
-          role: ChatMessageRole.System,
-          content: typeof promptString === "string" ? promptString : "",
-        }),
+        createEmptyMessage(
+          ChatMessageType.System,
+          ChatMessageRole.System,
+          typeof promptString === "string" ? promptString : "",
+        ),
       ],
     };
   }
@@ -325,11 +326,11 @@ const parseGeneration = (
       // Parse failed, treat as text prompt
       return {
         messages: [
-          createEmptyMessage({
-            type: ChatMessageType.System,
-            role: ChatMessageRole.System,
-            content: input?.toString() ?? "",
-          }),
+          createEmptyMessage(
+            ChatMessageType.System,
+            ChatMessageRole.System,
+            input?.toString() ?? "",
+          ),
         ],
         modelParams,
         tools,
@@ -341,11 +342,11 @@ const parseGeneration = (
     if (typeof input === "string") {
       return {
         messages: [
-          createEmptyMessage({
-            type: ChatMessageType.System,
-            role: ChatMessageRole.System,
-            content: input,
-          }),
+          createEmptyMessage(
+            ChatMessageType.System,
+            ChatMessageRole.System,
+            input,
+          ),
         ],
         modelParams,
         tools,
@@ -396,7 +397,7 @@ const parseGeneration = (
               ? outResult.data
                   .map(convertChatMlToPlayground)
                   .filter(
-                    (msg): msg is ChatMessage | PlaceholderMessage =>
+                    (msg: any): msg is ChatMessage | PlaceholderMessage =>
                       msg !== null,
                   )
                   // Filter tool calls without results (i.e. assistant messages with tool_calls but no results)
@@ -404,7 +405,7 @@ const parseGeneration = (
                   // we don't want this in the playground, because we a) cannot run the playground
                   // and b) if we jump to the playground, we exactly want to test if the LLM selects the tool
                   .filter(
-                    (msg) => msg.type !== ChatMessageType.AssistantToolCall,
+                    (msg: ChatMessage | PlaceholderMessage) => msg.type !== ChatMessageType.AssistantToolCall,
                   )
               : [];
 
@@ -493,7 +494,7 @@ function parseTools(
   try {
     const input = inputString ? JSON.parse(inputString) : null;
     const output = outputString ? JSON.parse(outputString) : null;
-    const metadata = metadataString ? JSON.parse(metadataString) : null;
+    const metadata = metadataString; // metadataString is already an object
 
     const inputTools = extractTools(input, metadata);
     if (inputTools.length > 0) return inputTools;

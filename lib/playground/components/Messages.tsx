@@ -55,9 +55,9 @@ const SubmitButton = () => {
       <Button
         className="flex-1"
         onClick={() => {
-          handleSubmit(streamingEnabled).catch((err) => console.error(err));
+          handleSubmit(streamingEnabled).catch((err: any) => console.error(err));
         }}
-        loading={isStreaming}
+        disabled={isStreaming}
       >
         <p>Submit</p>
       </Button>

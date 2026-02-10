@@ -1,4 +1,4 @@
-import { Divider } from "@tremor/react";
+import { Divider } from "@/lib/components/ui/divider";
 
 import { usePlaygroundContext } from "../context";
 import { MessagePlaceholderComponent } from "./MessagePlaceholderComponent";
@@ -20,12 +20,12 @@ export const MessagePlaceholders = () => {
         <div className="h-full overflow-auto">
           {messagePlaceholders
             .slice()
-            .sort((a, b) => {
+            .sort((a: any, b: any) => {
               if (a.isUsed && !b.isUsed) return -1;
               if (!a.isUsed && b.isUsed) return 1;
               return a.name.localeCompare(b.name);
             })
-            .map((placeholder, index) => (
+            .map((placeholder: any, index: number) => (
               <div key={placeholder.name}>
                 <MessagePlaceholderComponent messagePlaceholder={placeholder} />
                 {index !== messagePlaceholders.length - 1 && (
