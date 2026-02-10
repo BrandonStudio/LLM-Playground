@@ -3,24 +3,24 @@ import { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/router";
 import { v4 as uuidv4 } from "uuid";
 
-import { createEmptyMessage } from "@/src/components/ChatMessages/utils/createEmptyMessage";
-import { Button } from "@/src/components/ui/button";
+import { createEmptyMessage } from "@/lib/utils/createEmptyMessage";
+import { Button } from "@/lib/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/src/components/ui/dropdown-menu";
-import { Switch } from "@/src/components/ui/switch";
-import { usePersistedWindowIds } from "@/src/features/playground/page/hooks/usePersistedWindowIds";
+} from "@/lib/components/ui/dropdown-menu";
+import { Switch } from "@/lib/components/ui/switch";
+import { usePersistedWindowIds } from "@/lib/playground/hooks/usePersistedWindowIds";
 import {
   type PlaygroundCache,
   type PlaygroundSchema,
   type PlaygroundTool,
-} from "@/src/features/playground/page/types";
-import { usePostHogClientCapture } from "@/src/features/posthog-analytics/usePostHogClientCapture";
-import useProjectIdFromURL from "@/src/hooks/useProjectIdFromURL";
+} from "@/lib/playground/types";
+import { usePostHogClientCapture } from "@/lib/hooks/usePostHogClientCapture";
+import useProjectIdFromURL from "@/lib/hooks/useProjectIdFromURL";
 import {
   ChatMessageRole,
   type Observation,
@@ -36,16 +36,16 @@ import {
   PromptType,
   isGenerationLike,
 } from "@/lib/shared";
-import { normalizeInput, normalizeOutput } from "@/src/utils/chatml";
-import { extractTools } from "@/src/utils/chatml/extractTools";
-import { convertChatMlToPlayground } from "@/src/utils/chatml/playgroundConverter";
-import { api } from "@/src/utils/api";
-import { cn } from "@/src/utils/tailwind";
-import usePlaygroundCache from "@/src/features/playground/page/hooks/usePlaygroundCache";
+import { normalizeInput, normalizeOutput } from "@/lib/utils/chatml";
+import { extractTools } from "@/lib/utils/chatml";
+import { convertChatMlToPlayground } from "@/lib/utils/chatml";
+import { api } from "@/lib/utils/api";
+import { cn } from "@/lib/utils";
+import usePlaygroundCache from "@/lib/playground/hooks/usePlaygroundCache";
 import {
   type MetadataDomainClient,
   type WithStringifiedMetadata,
-} from "@/src/utils/clientSideDomainTypes";
+} from "@/lib/shared";
 
 type JumpToPlaygroundButtonProps = (
   | {

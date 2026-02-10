@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowUpRight } from "lucide-react";
 import * as z from "zod/v4";
 
-import { Button } from "@/src/components/ui/button";
+import { Button } from "@/lib/components/ui/button";
 import {
   Dialog,
   DialogBody,
@@ -14,7 +14,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/src/components/ui/dialog";
+} from "@/lib/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -23,15 +23,15 @@ import {
   FormLabel,
   FormMessage,
   FormDescription,
-} from "@/src/components/ui/form";
-import { Input } from "@/src/components/ui/input";
-import { Textarea } from "@/src/components/ui/textarea";
-import { LLMSchemaNameSchema } from "@/src/features/llm-schemas/validation";
-import { api } from "@/src/utils/api";
+} from "@/lib/components/ui/form";
+import { Input } from "@/lib/components/ui/input";
+import { Textarea } from "@/lib/components/ui/textarea";
+import { LLMSchemaNameSchema } from "@/lib/utils/validation";
+import { api } from "@/lib/utils/api";
 
 import { JSONSchemaFormSchema, type LlmSchema } from "@/lib/shared";
-import { CodeMirrorEditor } from "@/src/components/editor";
-import { showErrorToast } from "@/src/features/notifications/showErrorToast";
+import { CodeMirrorEditor } from "@/lib/components/editor";
+import { showErrorToast } from "@/lib/utils/notifications";
 
 const formSchema = z.object({
   name: LLMSchemaNameSchema,

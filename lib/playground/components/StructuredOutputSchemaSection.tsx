@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect } from "react";
 
-import { usePlaygroundContext } from "@/src/features/playground/page/context";
-import { Button } from "@/src/components/ui/button";
-import { ScrollArea } from "@/src/components/ui/scroll-area";
+import { usePlaygroundContext } from "@/lib/playground/context";
+import { Button } from "@/lib/components/ui/button";
+import { ScrollArea } from "@/lib/components/ui/scroll-area";
 import { PlusIcon, PencilIcon, MinusCircle, BoxIcon } from "lucide-react";
 import { type LlmSchema } from "@/lib/shared";
-import { api } from "@/src/utils/api";
-import useProjectIdFromURL from "@/src/hooks/useProjectIdFromURL";
-import { CreateOrEditLLMSchemaDialog } from "@/src/features/playground/page/components/CreateOrEditLLMSchemaDialog";
+import { api } from "@/lib/utils/api";
+import useProjectIdFromURL from "@/lib/hooks/useProjectIdFromURL";
+import { CreateOrEditLLMSchemaDialog } from "@/lib/playground/components/CreateOrEditLLMSchemaDialog";
 import {
   Command,
   CommandEmpty,
@@ -16,8 +16,8 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "@/src/components/ui/command";
-import { type PlaygroundSchema } from "@/src/features/playground/page/types";
+} from "@/lib/components/ui/command";
+import { type PlaygroundSchema } from "@/lib/playground/types";
 
 // Popover content component for use in CollapsibleSection action buttons
 export const StructuredOutputSchemaPopover = () => {

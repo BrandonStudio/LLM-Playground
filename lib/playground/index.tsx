@@ -1,15 +1,15 @@
 import React, { useCallback } from "react";
-import { Button } from "@/src/components/ui/button";
+import { Button } from "@/lib/components/ui/button";
 import { Play, Loader2 } from "lucide-react";
-import { ResetPlaygroundButton } from "@/src/features/playground/page/components/ResetPlaygroundButton";
-import { useWindowCoordination } from "@/src/features/playground/page/hooks/useWindowCoordination";
-import { usePersistedWindowIds } from "@/src/features/playground/page/hooks/usePersistedWindowIds";
-import useCommandEnter from "@/src/features/playground/page/hooks/useCommandEnter";
-import { type MultiWindowState } from "@/src/features/playground/page/types";
-import Page from "@/src/components/layouts/page";
-import MultiWindowPlayground from "@/src/features/playground/page/components/MultiWindowPlayground";
-import { NoModelConfiguredAlert } from "@/src/features/playground/page/components/NoModelConfiguredAlert";
-import useProjectIdFromURL from "@/src/hooks/useProjectIdFromURL";
+import { ResetPlaygroundButton } from "@/lib/playground/components/ResetPlaygroundButton";
+import { useWindowCoordination } from "@/lib/playground/hooks/useWindowCoordination";
+import { usePersistedWindowIds } from "@/lib/playground/hooks/usePersistedWindowIds";
+import useCommandEnter from "@/lib/playground/hooks/useCommandEnter";
+import { type MultiWindowState } from "@/lib/playground/types";
+import Page from "@/lib/components/layouts/page";
+import MultiWindowPlayground from "@/lib/playground/components/MultiWindowPlayground";
+import { NoModelConfiguredAlert } from "@/lib/playground/components/NoModelConfiguredAlert";
+import useProjectIdFromURL from "@/lib/hooks/useProjectIdFromURL";
 
 /**
  * PlaygroundPage Component

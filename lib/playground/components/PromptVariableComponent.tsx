@@ -1,7 +1,7 @@
 import { CheckCircle2, Circle, TrashIcon } from "lucide-react";
-import { Button } from "@/src/components/ui/button";
+import { Button } from "@/lib/components/ui/button";
 import { type PromptVariable } from "@/lib/shared";
-import { CodeMirrorEditor } from "@/src/components/editor";
+import { CodeMirrorEditor } from "@/lib/components/editor";
 
 import { usePlaygroundContext } from "../context";
 import { useNamingConflicts } from "../hooks/useNamingConflicts";

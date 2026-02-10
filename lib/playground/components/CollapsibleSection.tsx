@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Button } from "@/src/components/ui/button";
-import { Badge } from "@/src/components/ui/badge";
+import { Button } from "@/lib/components/ui/button";
+import { Badge } from "@/lib/components/ui/badge";
 import { ChevronRight, ChevronDown } from "lucide-react";
-import { cn } from "@/src/utils/tailwind";
+import { cn } from "@/lib/utils";
 
 interface CollapsibleSectionProps {
   title: string;

@@ -2,7 +2,7 @@ import { Check, Save } from "lucide-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-import { Button } from "@/src/components/ui/button";
+import { Button } from "@/lib/components/ui/button";
 import {
   InputCommand,
   InputCommandEmpty,
@@ -10,25 +10,25 @@ import {
   InputCommandInput,
   InputCommandItem,
   InputCommandList,
-} from "@/src/components/ui/input-command";
+} from "@/lib/components/ui/input-command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/src/components/ui/popover";
+} from "@/lib/components/ui/popover";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/src/components/ui/tooltip";
-import { usePlaygroundContext } from "@/src/features/playground/page/context";
-import usePlaygroundCache from "@/src/features/playground/page/hooks/usePlaygroundCache";
-import { usePostHogClientCapture } from "@/src/features/posthog-analytics/usePostHogClientCapture";
-import useProjectIdFromURL from "@/src/hooks/useProjectIdFromURL";
-import { api } from "@/src/utils/api";
-import { cn } from "@/src/utils/tailwind";
-import DocPopup from "@/src/components/layouts/doc-popup";
+} from "@/lib/components/ui/tooltip";
+import { usePlaygroundContext } from "@/lib/playground/context";
+import usePlaygroundCache from "@/lib/playground/hooks/usePlaygroundCache";
+import { usePostHogClientCapture } from "@/lib/hooks/usePostHogClientCapture";
+import useProjectIdFromURL from "@/lib/hooks/useProjectIdFromURL";
+import { api } from "@/lib/utils/api";
+import { cn } from "@/lib/utils";
+import DocPopup from "@/lib/components/layouts/doc-popup";
 import { PromptType } from "@/lib/shared";
 
 interface SaveToPromptButtonProps {

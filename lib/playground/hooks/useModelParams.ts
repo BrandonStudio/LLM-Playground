@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useCallback, useState } from "react";
 
-import useProjectIdFromURL from "@/src/hooks/useProjectIdFromURL";
-import { api } from "@/src/utils/api";
-import useLocalStorage from "@/src/components/useLocalStorage";
+import useProjectIdFromURL from "@/lib/hooks/useProjectIdFromURL";
+import { api } from "@/lib/utils/api";
+import useLocalStorage from "@/lib/hooks/useLocalStorage";
 import {
   LLMAdapter,
   supportedModels,
   type UIModelParams,
 } from "@/lib/shared";
-import { type ModelParamsContext } from "@/src/components/ModelParameters";
+import { type ModelParamsContext } from "@/lib/components/ModelParameters";
 import { getModelNameKey, getModelProviderKey } from "../storage/keys";
 
 /**

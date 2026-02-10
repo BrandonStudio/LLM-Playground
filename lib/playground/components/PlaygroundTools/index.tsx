@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect } from "react";
 
-import { usePlaygroundContext } from "@/src/features/playground/page/context";
-import { Button } from "@/src/components/ui/button";
-import { ScrollArea } from "@/src/components/ui/scroll-area";
+import { usePlaygroundContext } from "@/lib/playground/context";
+import { Button } from "@/lib/components/ui/button";
+import { ScrollArea } from "@/lib/components/ui/scroll-area";
 import { PlusIcon, PencilIcon, MinusCircle, WrenchIcon } from "lucide-react";
 import { type LlmTool } from "@prisma/client";
-import { api } from "@/src/utils/api";
-import useProjectIdFromURL from "@/src/hooks/useProjectIdFromURL";
-import { CreateOrEditLLMToolDialog } from "@/src/features/playground/page/components/CreateOrEditLLMToolDialog";
+import { api } from "@/lib/utils/api";
+import useProjectIdFromURL from "@/lib/hooks/useProjectIdFromURL";
+import { CreateOrEditLLMToolDialog } from "@/lib/playground/components/CreateOrEditLLMToolDialog";
 import {
   Command,
   CommandEmpty,
@@ -16,9 +16,9 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "@/src/components/ui/command";
+} from "@/lib/components/ui/command";
 
-import { type PlaygroundTool } from "@/src/features/playground/page/types";
+import { type PlaygroundTool } from "@/lib/playground/types";
 
 // Popover content component for use in CollapsibleSection action buttons
 export const PlaygroundToolsPopover = () => {

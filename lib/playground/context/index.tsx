@@ -9,12 +9,12 @@ import React, {
 
 import { v4 as uuidv4 } from "uuid";
 
-import { createEmptyMessage } from "@/src/components/ChatMessages/utils/createEmptyMessage";
-import { useModelParams } from "@/src/features/playground/page/hooks/useModelParams";
-import usePlaygroundCache from "@/src/features/playground/page/hooks/usePlaygroundCache";
-import { usePostHogClientCapture } from "@/src/features/posthog-analytics/usePostHogClientCapture";
-import { showErrorToast } from "@/src/features/notifications/showErrorToast";
-import useProjectIdFromURL from "@/src/hooks/useProjectIdFromURL";
+import { createEmptyMessage } from "@/lib/utils/createEmptyMessage";
+import { useModelParams } from "@/lib/playground/hooks/useModelParams";
+import usePlaygroundCache from "@/lib/playground/hooks/usePlaygroundCache";
+import { usePostHogClientCapture } from "@/lib/hooks/usePostHogClientCapture";
+import { showErrorToast } from "@/lib/utils/notifications";
+import useProjectIdFromURL from "@/lib/hooks/useProjectIdFromURL";
 import {
   ChatMessageRole,
   extractVariables,
@@ -31,9 +31,9 @@ import {
   type MessagePlaceholderValues,
 } from "@/lib/shared";
 
-import type { MessagesContext } from "@/src/components/ChatMessages/types";
-import type { ModelParamsContext } from "@/src/components/ModelParameters";
-import { env } from "@/src/env.mjs";
+import type { MessagesContext } from "@/lib/components/ChatMessages/types";
+import type { ModelParamsContext } from "@/lib/components/ModelParameters";
+import { env } from "@/lib/env";
 import {
   type PlaygroundSchema,
   type PlaygroundTool,
@@ -42,12 +42,12 @@ import {
   type PlaygroundHandle,
   PLAYGROUND_EVENTS,
   MULTI_WINDOW_CONFIG,
-} from "@/src/features/playground/page/types";
+} from "@/lib/playground/types";
 import {
   getPlaygroundEventBus,
   useWindowCoordination,
-} from "@/src/features/playground/page/hooks/useWindowCoordination";
-import { getFinalModelParams } from "@/src/utils/getFinalModelParams";
+} from "@/lib/playground/hooks/useWindowCoordination";
+import { getFinalModelParams } from "@/lib/utils/modelParams";
 
 type PlaygroundContextType = {
   promptVariables: PromptVariable[];

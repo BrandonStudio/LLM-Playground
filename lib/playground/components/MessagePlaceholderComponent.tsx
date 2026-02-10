@@ -1,6 +1,6 @@
 import { CheckCircle2, Circle, TrashIcon } from "lucide-react";
-import { Button } from "@/src/components/ui/button";
-import { CodeMirrorEditor } from "@/src/components/editor";
+import { Button } from "@/lib/components/ui/button";
+import { CodeMirrorEditor } from "@/lib/components/editor";
 import { useState, useCallback } from "react";
 import { type ChatMessage } from "@/lib/shared";
 

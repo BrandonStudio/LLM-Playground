@@ -1,24 +1,24 @@
-import { Button } from "@/src/components/ui/button";
-import { usePlaygroundContext } from "@/src/features/playground/page/context";
+import { Button } from "@/lib/components/ui/button";
+import { usePlaygroundContext } from "@/lib/playground/context";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/src/components/ui/dropdown-menu";
-import { Switch } from "@/src/components/ui/switch";
+} from "@/lib/components/ui/dropdown-menu";
+import { Switch } from "@/lib/components/ui/switch";
 import { Settings } from "lucide-react";
-import useLocalStorage from "@/src/components/useLocalStorage";
-import { env } from "@/src/env.mjs";
+import useLocalStorage from "@/lib/hooks/useLocalStorage";
+import { env } from "@/lib/env";
 
 import { GenerationOutput } from "./GenerationOutput";
-import { ChatMessages } from "@/src/components/ChatMessages";
-import { type MessagesContext } from "@/src/components/ChatMessages/types";
+import { ChatMessages } from "@/lib/components/ChatMessages";
+import { type MessagesContext } from "@/lib/components/ChatMessages/types";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from "@/src/components/ui/resizable";
+} from "@/lib/components/ui/resizable";
 
 export const Messages: React.FC<MessagesContext> = (props) => {
   return (
