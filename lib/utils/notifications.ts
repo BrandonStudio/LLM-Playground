@@ -7,7 +7,7 @@ export function showSuccessToast(message: string) {
 }
 
 export function showErrorToast(message: string, description?: string) {
-  if (typeof window !== "undefined") {
+  if (typeof window !== "undefined" && process.env.NODE_ENV !== "test") {
     toast.error(message, { description });
   }
 }

@@ -3,7 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 
 export function createEmptyMessage(
   type: ChatMessageType = ChatMessageType.User,
-  role?: ChatMessageRole
+  role?: ChatMessageRole,
+  content?: string
 ): ChatMessageWithId {
   const defaultRole = 
     type === ChatMessageType.System ? ChatMessageRole.System :
@@ -15,6 +16,6 @@ export function createEmptyMessage(
     id: uuidv4(),
     type,
     role: role || defaultRole,
-    content: "",
+    content: content || "",
   };
 }
