@@ -18,8 +18,12 @@ export function ChatMessages({
       <div className="space-y-4 p-4">
         {messages.map((message) => (
           <div key={message.id} className="border rounded p-3">
-            <div className="font-semibold mb-1">{message.role}</div>
-            <div className="text-sm">{String(message.content)}</div>
+            <div className="font-semibold mb-1">
+              {"role" in message ? message.role : message.type}
+            </div>
+            <div className="text-sm">
+              {"content" in message ? String(message.content) : `Placeholder: ${message.name}`}
+            </div>
           </div>
         ))}
       </div>
