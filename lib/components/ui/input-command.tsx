@@ -3,6 +3,10 @@ import { cn } from "@/lib/utils"
 import { Popover, PopoverContent, PopoverTrigger } from "./popover"
 import { Command, CommandEmpty, CommandGroup, CommandItem } from "./command"
 
+/**
+ * Combined input field with command palette dropdown.
+ * Shows filterable options as user types.
+ */
 interface InputCommandProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> {
   value?: string
   onValueChange?: (value: string) => void
