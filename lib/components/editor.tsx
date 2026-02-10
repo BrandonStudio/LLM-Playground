@@ -7,6 +7,8 @@ interface CodeMirrorEditorProps {
   placeholder?: string;
   className?: string;
   disabled?: boolean;
+  mode?: string; // For future compatibility with CodeMirror
+  minHeight?: number; // For future compatibility with CodeMirror
 }
 
 export function CodeMirrorEditor({
@@ -15,7 +17,10 @@ export function CodeMirrorEditor({
   placeholder,
   className,
   disabled,
+  minHeight,
 }: CodeMirrorEditorProps) {
+  const style = minHeight ? { minHeight: `${minHeight}px` } : undefined;
+  
   return (
     <Textarea
       value={value}
@@ -24,6 +29,7 @@ export function CodeMirrorEditor({
       className={className}
       disabled={disabled}
       rows={10}
+      style={style}
     />
   );
 }

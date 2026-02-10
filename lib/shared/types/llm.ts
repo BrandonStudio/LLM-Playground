@@ -100,6 +100,14 @@ const GoogleAIStudioMessageContentWithToolUse = z.object({
   }),
 });
 
+export const OpenAIResponseFormatSchema = z.object({
+  type: z.literal("json_schema"),
+  json_schema: z.object({
+    name: z.string(),
+    schema: LLMJSONSchema,
+  }),
+});
+
 export const ToolCallResponseSchema = z.object({
   content: z.union([
     z.string(),

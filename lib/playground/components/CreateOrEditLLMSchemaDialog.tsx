@@ -144,7 +144,6 @@ export const CreateOrEditLLMSchemaDialog: React.FC<
       showErrorToast(
         "Failed to prettify JSON",
         "Please verify your input is valid JSON",
-        "WARNING",
       );
     }
   };

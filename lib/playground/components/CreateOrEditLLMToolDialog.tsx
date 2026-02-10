@@ -144,7 +144,6 @@ export const CreateOrEditLLMToolDialog: React.FC<CreateOrEditLLMToolDialog> = (
       showErrorToast(
         "Failed to prettify JSON",
         "Please verify your input is valid JSON",
-        "WARNING",
       );
     }
   };

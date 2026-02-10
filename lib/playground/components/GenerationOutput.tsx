@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/lib/components/ui/button";
 import { usePlaygroundContext } from "../context";
-import { ChatMessageRole, ChatMessageType } from "@/lib/shared";
+import { ChatMessageRole, ChatMessageType, type LLMToolCall } from "@/lib/shared";
 import { BracesIcon, Check, Copy, Plus } from "lucide-react";
 import { ToolCallCard } from "@/lib/components/ChatMessages/ToolCallCard";
-import { copyTextToClipboard } from "@/lib/utils/clipboard";
+import { copyToClipboard } from "@/lib/utils/clipboard";
 
 export const GenerationOutput = () => {
   const [isCopied, setIsCopied] = useState(false);
@@ -17,7 +17,7 @@ export const GenerationOutput = () => {
   const handleCopy = () => {
     setIsCopied(true);
     const textToCopy = isJson ? outputJson : output;
-    void copyTextToClipboard(textToCopy);
+    void copyToClipboard(textToCopy);
     setTimeout(() => setIsCopied(false), 1000);
   };
 
@@ -104,7 +104,7 @@ export const GenerationOutput = () => {
             {isJson ? outputJson : output}
           </pre>
           {outputToolCalls.length > 0
-            ? outputToolCalls.map((toolCall) => (
+            ? outputToolCalls.map((toolCall: LLMToolCall) => (
                 <div className="mt-4" key={toolCall.id}>
                   <ToolCallCard toolCall={toolCall} />
                 </div>
