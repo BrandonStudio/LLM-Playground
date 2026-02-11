@@ -91,7 +91,7 @@ export const PlaygroundProvider: React.FC<PlaygroundProviderProps> = ({
   children,
   windowId,
 }) => {
-  const capture = usePostHogClientCapture();
+  const { capture } = usePostHogClientCapture();
   const projectId = useProjectIdFromURL();
   const { playgroundCache, setPlaygroundCache } = usePlaygroundCache(windowId);
   const [promptVariables, setPromptVariables] = useState<PromptVariable[]>([]);
@@ -107,16 +107,8 @@ export const PlaygroundProvider: React.FC<PlaygroundProviderProps> = ({
   const [structuredOutputSchema, setStructuredOutputSchema] =
     useState<PlaygroundSchema | null>(null);
   const [messages, setMessages] = useState<ChatMessageWithId[]>([
-    createEmptyMessage({
-      type: ChatMessageType.System,
-      role: ChatMessageRole.System,
-      content: "",
-    }),
-    createEmptyMessage({
-      type: ChatMessageType.User,
-      role: ChatMessageRole.User,
-      content: "",
-    }),
+    createEmptyMessage(ChatMessageType.System, ChatMessageRole.System, ""),
+    createEmptyMessage(ChatMessageType.User, ChatMessageRole.User, ""),
   ]);
 
   const {
@@ -129,6 +121,11 @@ export const PlaygroundProvider: React.FC<PlaygroundProviderProps> = ({
     providerModelCombinations,
   } = useModelParams(windowId);
   const { registerWindow, unregisterWindow } = useWindowCoordination();
+
+  // Adapter function to match ModelParamsContext interface
+  const updateModelParams = useCallback((params: Partial<UIModelParams>) => {
+    setModelParams((prev) => ({ ...prev, ...params }));
+  }, [setModelParams]);
 
   const toolCallIds = messages.reduce((acc, m) => {
     if (m.type === ChatMessageType.AssistantToolCall) {
@@ -235,21 +232,23 @@ export const PlaygroundProvider: React.FC<PlaygroundProviderProps> = ({
   const addMessage: PlaygroundContextType["addMessage"] = useCallback(
     (message) => {
       if (message.type === ChatMessageType.AssistantToolCall) {
-        const toolCallMessage = createEmptyMessage({
+        const toolCallMessage: ChatMessageWithId = {
+          id: uuidv4(),
           type: ChatMessageType.AssistantToolCall,
           role: ChatMessageRole.Assistant,
           content: message.content ?? "",
           toolCalls: message.toolCalls,
-        });
+        };
         const toolResultMessages: ChatMessageWithId[] = [];
 
         for (const toolCall of message.toolCalls) {
-          const toolResultMessage = createEmptyMessage({
+          const toolResultMessage: ChatMessageWithId = {
+            id: uuidv4(),
             type: ChatMessageType.ToolResult,
             role: ChatMessageRole.Tool,
             content: "",
             toolCallId: toolCall.id,
-          });
+          };
 
           toolResultMessages.push(toolResultMessage);
         }
@@ -269,7 +268,7 @@ export const PlaygroundProvider: React.FC<PlaygroundProviderProps> = ({
         setMessages((prev) => [...prev, placeholderMessage]);
         return placeholderMessage;
       } else {
-        const newMessage = createEmptyMessage(message);
+        const newMessage = createEmptyMessage(message.type, message.role as ChatMessageRole, message.content);
         setMessages((prev) => [...prev, newMessage]);
 
         return newMessage;
@@ -279,20 +278,20 @@ export const PlaygroundProvider: React.FC<PlaygroundProviderProps> = ({
   );
 
   const updateMessage: PlaygroundContextType["updateMessage"] = useCallback(
-    (_, id, key, value) => {
+    (id, content) => {
       setMessages((prev) =>
         prev.map((message) =>
-          message.id === id ? { ...message, [key]: value } : message,
+          message.id === id ? { ...message, content } : message,
         ),
       );
     },
     [],
   );
 
-  const replaceMessage: PlaygroundContextType["replaceMessage"] = useCallback(
-    (id, message) => {
+  const replaceMessage = useCallback(
+    (id: string, message: Partial<ChatMessageWithId>) => {
       setMessages((prev) =>
-        prev.map((m) => (m.id === id ? { id, ...message } : m)),
+        prev.map((m) => (m.id === id ? { ...m, ...message, id } as ChatMessageWithId : m)),
       );
     },
     [],
@@ -674,23 +673,16 @@ export const PlaygroundProvider: React.FC<PlaygroundProviderProps> = ({
         addMessage,
         setMessages,
         updateMessage,
-        replaceMessage,
         deleteMessage,
-        toolCallIds,
 
         modelParams,
-        updateModelParamValue,
-        setModelParamEnabled,
-        providerModelCombinations,
+        updateModelParams,
 
         output,
         outputJson,
         outputToolCalls,
         handleSubmit,
         isStreaming,
-
-        availableProviders,
-        availableModels,
       }}
     >
       {children}

@@ -8,7 +8,7 @@ import {
   supportedModels,
   type UIModelParams,
 } from "@/lib/shared";
-import { type ModelParamsContext } from "@/lib/components/ModelParameters";
+import { type ModelParamsContext } from "@/lib/components/ModelParameters/types";
 import { getModelNameKey, getModelProviderKey } from "../storage/keys";
 
 /**
@@ -57,13 +57,13 @@ export const useModelParams = (windowId?: string) => {
   );
 
   const providerModelCombinations =
-    availableLLMApiKeys.data?.data.reduce((acc, v) => {
+    availableLLMApiKeys.data?.data.reduce((acc, v: any) => {
       if (v.withDefaultModels) {
         acc.push(
-          ...supportedModels[v.adapter].map((m) => `${v.provider}: ${m}`),
+          ...supportedModels[v.adapter as LLMAdapter].map((m) => `${v.provider}: ${m}`),
         );
       }
-      acc.push(...v.customModels.map((m) => `${v.provider}: ${m}`));
+      acc.push(...v.customModels.map((m: string) => `${v.provider}: ${m}`));
 
       return acc;
     }, [] as string[]) ?? [];
@@ -75,19 +75,17 @@ export const useModelParams = (windowId?: string) => {
         : selectedProviderApiKey.withDefaultModels
           ? [
               ...selectedProviderApiKey.customModels,
-              ...supportedModels[selectedProviderApiKey.adapter],
+              ...supportedModels[selectedProviderApiKey.adapter as LLMAdapter],
             ]
           : selectedProviderApiKey.customModels,
     [selectedProviderApiKey],
   );
 
-  const updateModelParamValue = useCallback<
-    ModelParamsContext["updateModelParamValue"]
-  >(
-    (key, value) => {
+  const updateModelParamValue = useCallback(
+    (key: string, value: any) => {
       setModelParams((prev) => ({
         ...prev,
-        [key]: { ...prev[key], value },
+        [key]: { ...(prev as any)[key], value },
       }));
 
       if (value && key === "model") {
@@ -100,11 +98,11 @@ export const useModelParams = (windowId?: string) => {
     [setPersistedModelName, setPersistedModelProvider, setModelParams],
   );
 
-  const setModelParamEnabled: ModelParamsContext["setModelParamEnabled"] = (
-    key,
-    enabled,
+  const setModelParamEnabled = (
+    key: string,
+    enabled: boolean,
   ) => {
-    setModelParams((prev) => ({
+    setModelParams((prev: any) => ({
       ...prev,
       [key]: { ...prev[key], enabled },
     }));

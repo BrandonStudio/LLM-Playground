@@ -168,7 +168,10 @@ function PlaygroundWindowContent({
       <div className="relative flex-shrink-0 border-b bg-muted/50 px-3 py-1">
         <div className="flex items-center pr-32 @xl:pr-96">
           <div className="flex items-center gap-2">
-            <ModelParameters {...playgroundContext} layout="compact" />
+            <ModelParameters 
+              modelParams={playgroundContext.modelParams} 
+              onChange={playgroundContext.updateModelParams}
+            />
           </div>
 
           <div className="absolute right-3 top-1/2 flex -translate-y-1/2 items-center gap-2">

@@ -29,7 +29,7 @@ import useProjectIdFromURL from "@/lib/hooks/useProjectIdFromURL";
 import { api } from "@/lib/utils/api";
 import { cn } from "@/lib/utils";
 import DocPopup from "@/lib/components/layouts/doc-popup";
-import { PromptType } from "@/lib/shared";
+import { PromptType, type UIModelParams } from "@/lib/shared";
 
 interface SaveToPromptButtonProps {
   className?: string;
@@ -64,7 +64,7 @@ export const SaveToPromptButton: React.FC<SaveToPromptButtonProps> = ({
     capture("playground:save_to_new_prompt_button_click", { projectId });
 
     setPlaygroundCache({
-      modelParams,
+      modelParams: modelParams as (Partial<UIModelParams> & Pick<UIModelParams, "provider" | "model">),
       messages,
       output,
       promptVariables,
@@ -79,7 +79,7 @@ export const SaveToPromptButton: React.FC<SaveToPromptButtonProps> = ({
     capture("playground:save_to_prompt_version_button_click", { projectId });
 
     setPlaygroundCache({
-      modelParams,
+      modelParams: modelParams as (Partial<UIModelParams> & Pick<UIModelParams, "provider" | "model">),
       messages,
       output,
       promptVariables,

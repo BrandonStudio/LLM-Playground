@@ -112,18 +112,18 @@ export const clearAllPlaygroundData = (): void => {
   const sessionKeysToRemove: string[] = [];
   for (let i = 0; i < sessionStorage.length; i++) {
     const key = sessionStorage.key(i);
-    if (key?.startsWith("playground")) {
+    if (key?.startsWith("playground") || key?.startsWith("langfuse-playgroundCache")) {
       sessionKeysToRemove.push(key);
     }
   }
   sessionKeysToRemove.forEach((key) => sessionStorage.removeItem(key));
 
   const localKeysToRemove: string[] = [];
-  for (let i = 0; i < sessionStorage.length; i++) {
-    const key = sessionStorage.key(i);
-    if (key?.startsWith("llmModel")) {
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key?.startsWith("langfuse-llmModel") || key?.startsWith("langfuse-playground-streaming")) {
       localKeysToRemove.push(key);
     }
   }
-  localKeysToRemove.forEach((key) => sessionStorage.removeItem(key));
+  localKeysToRemove.forEach((key) => localStorage.removeItem(key));
 };

@@ -86,17 +86,7 @@ export default function PlaygroundPage() {
   // Don't render until window IDs are loaded
   if (!isLoaded) {
     return (
-      <Page
-        withPadding={false}
-        headerProps={{
-          title: "Playground",
-          help: {
-            description:
-              "A sandbox to test and iterate your prompts across multiple windows",
-            href: "https://langfuse.com/docs/prompt-management/features/playground",
-          },
-        }}
-      >
+      <Page>
         <div className="flex h-full items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin" />
         </div>
@@ -117,18 +107,13 @@ export default function PlaygroundPage() {
   };
 
   return (
-    <Page
-      scrollable={false}
-      withPadding={false}
-      headerProps={{
-        title: "Playground",
-        help: {
-          description:
-            "A sandbox to test and iterate your prompts across multiple windows",
-          href: "https://langfuse.com/docs/prompt-management/features/playground",
-        },
-        actionButtonsRight: (
-          <div className="flex flex-nowrap items-center gap-2">
+    <Page>
+      <div className="flex flex-col h-full">
+        {/* Header section */}
+        <div className="border-b bg-muted/50 px-4 py-3">
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-bold">Playground</h1>
+            <div className="flex flex-nowrap items-center gap-2">
             {/* Window Count Display - Hidden on mobile */}
             <div className="hidden items-center gap-2 text-sm text-muted-foreground md:flex">
               <span className="whitespace-nowrap">
@@ -171,21 +156,20 @@ export default function PlaygroundPage() {
             {/* Reset Playground Button */}
             <ResetPlaygroundButton />
           </div>
-        ),
-      }}
-    >
-      <div className="flex h-full flex-col">
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-hidden">
         {!hasAnyModelConfigured && projectId && (
           <NoModelConfiguredAlert projectId={projectId} />
         )}
-        <div className="flex-1 overflow-hidden">
-          <MultiWindowPlayground
-            windowState={windowState}
-            onRemoveWindow={removeWindow}
-            onAddWindow={addWindow}
-          />
-        </div>
+        <MultiWindowPlayground
+          windowState={windowState}
+          onRemoveWindow={removeWindow}
+          onAddWindow={addWindow}
+        />
       </div>
-    </Page>
+    </div>
+  </Page>
   );
 }

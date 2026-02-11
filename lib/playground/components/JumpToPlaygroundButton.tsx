@@ -48,6 +48,13 @@ import {
   type WithStringifiedMetadata,
 } from "@/lib/shared";
 
+interface LlmApiKey {
+  provider: string;
+  adapter: LLMAdapter;
+  customModels?: string[];
+  withDefaultModels?: boolean;
+}
+
 type JumpToPlaygroundButtonProps = (
   | {
       source: "prompt";
@@ -103,17 +110,17 @@ export const JumpToPlaygroundButton: React.FC<JumpToPlaygroundButtonProps> = (
   const modelToProviderMap = useMemo(() => {
     const modelProviderMap: Record<string, string> = {};
 
-    (apiKeys.data?.data ?? []).forEach((apiKey) => {
+    (apiKeys.data?.data as LlmApiKey[] ?? []).forEach((apiKey) => {
       const { provider, customModels, withDefaultModels, adapter } = apiKey;
       // add default models if enabled
       if (withDefaultModels) {
-        (playgroundSupportedModels[adapter as LLMAdapter] ?? []).forEach((model) => {
+        (playgroundSupportedModels[adapter] ?? []).forEach((model) => {
           modelProviderMap[model] = provider;
         });
       }
 
       // add custom models if set
-      (customModels ?? []).forEach((customModel: any) => {
+      (customModels ?? []).forEach((customModel) => {
         modelProviderMap[customModel] = provider;
       });
     });
