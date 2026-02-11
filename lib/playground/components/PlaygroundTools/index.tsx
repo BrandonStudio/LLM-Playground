@@ -169,10 +169,10 @@ export const PlaygroundTools = () => {
   );
 
   useEffect(() => {
-    tools.forEach((tool, index) => {
+    tools.forEach((tool: any, index: number) => {
       if (!tool.existingLlmTool) {
         const matchingSavedTool = savedTools.find(
-          (savedTool) => savedTool.name === tool.name,
+          (savedTool: any) => savedTool.name === tool.name,
         );
 
         if (matchingSavedTool) {
