@@ -32,7 +32,7 @@ import {
 } from "@/lib/shared";
 
 import type { MessagesContext } from "@/lib/components/ChatMessages/types";
-import type { ModelParamsContext } from "@/lib/components/ModelParameters";
+import type { ModelParamsContext } from "@/lib/components/ModelParameters/types";
 import { env } from "@/lib/env";
 import {
   type PlaygroundSchema,

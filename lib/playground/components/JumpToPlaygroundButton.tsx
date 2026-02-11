@@ -103,7 +103,7 @@ export const JumpToPlaygroundButton: React.FC<JumpToPlaygroundButtonProps> = (
   const modelToProviderMap = useMemo(() => {
     const modelProviderMap: Record<string, string> = {};
 
-    (apiKeys.data?.data ?? []).forEach((apiKey: any) => {
+    (apiKeys.data?.data ?? []).forEach((apiKey) => {
       const { provider, customModels, withDefaultModels, adapter } = apiKey;
       // add default models if enabled
       if (withDefaultModels) {
@@ -393,21 +393,22 @@ const parseGeneration = (
         if (output && typeof output === "object") {
           try {
             const outResult = normalizeOutput(output, ctx);
-            const outputMessages = outResult.success
-              ? outResult.data
+            const rawMessages = outResult.success ? outResult.data : [];
+            const filteredMessages: Array<ChatMessage | PlaceholderMessage> = (rawMessages as unknown[])
                   .map(convertChatMlToPlayground)
                   .filter(
-                    (msg: any): msg is ChatMessage | PlaceholderMessage =>
+                    (msg): msg is ChatMessage | PlaceholderMessage =>
                       msg !== null,
-                  )
+                  );
+            
+            const outputMessages = filteredMessages
                   // Filter tool calls without results (i.e. assistant messages with tool_calls but no results)
                   // here, a tool was just selected by an LLM but not called yet.
                   // we don't want this in the playground, because we a) cannot run the playground
                   // and b) if we jump to the playground, we exactly want to test if the LLM selects the tool
                   .filter(
-                    (msg: ChatMessage | PlaceholderMessage) => msg.type !== ChatMessageType.AssistantToolCall,
-                  )
-              : [];
+                    (msg) => msg.type !== ChatMessageType.AssistantToolCall,
+                  );
 
             // Append output messages to input messages
             messages = [...messages, ...outputMessages];

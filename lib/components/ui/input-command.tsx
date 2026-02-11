@@ -82,3 +82,13 @@ const InputCommand = React.forwardRef<HTMLInputElement, InputCommandProps>(
 InputCommand.displayName = "InputCommand"
 
 export { InputCommand }
+
+// Re-export Command components for convenience
+export {
+  Command as InputCommandRoot,
+  CommandEmpty as InputCommandEmpty,
+  CommandGroup as InputCommandGroup,
+  CommandInput as InputCommandInput,
+  CommandItem as InputCommandItem,
+  CommandList as InputCommandList,
+} from "./command"

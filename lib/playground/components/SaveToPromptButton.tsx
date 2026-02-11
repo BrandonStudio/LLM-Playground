@@ -41,7 +41,7 @@ export const SaveToPromptButton: React.FC<SaveToPromptButtonProps> = ({
   const [selectedPromptId, setSelectedPromptId] = useState("");
   const { modelParams, messages, output, promptVariables } =
     usePlaygroundContext();
-  const capture = usePostHogClientCapture();
+  const { capture } = usePostHogClientCapture();
   const router = useRouter();
   const projectId = useProjectIdFromURL();
   const { setPlaygroundCache } = usePlaygroundCache();
@@ -130,7 +130,6 @@ export const SaveToPromptButton: React.FC<SaveToPromptButtonProps> = ({
           <InputCommand className="min-h-[8rem]">
             <InputCommandInput
               placeholder="Search chat prompts..."
-              variant="bottom"
             />
             <InputCommandEmpty>
               No chat prompt found

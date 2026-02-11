@@ -169,10 +169,10 @@ export const PlaygroundTools = () => {
   );
 
   useEffect(() => {
-    tools.forEach((tool: any, index: number) => {
+    (tools as PlaygroundTool[]).forEach((tool, index) => {
       if (!tool.existingLlmTool) {
         const matchingSavedTool = savedTools.find(
-          (savedTool: any) => savedTool.name === tool.name,
+          (savedTool) => savedTool.name === tool.name,
         );
 
         if (matchingSavedTool) {
@@ -236,7 +236,7 @@ export const PlaygroundTools = () => {
         </div>
       ) : (
         <div className="space-y-1">
-          {tools.map((tool) => (
+          {(tools as PlaygroundTool[]).map((tool) => (
             <CreateOrEditLLMToolDialog
               key={tool.id}
               projectId={projectId as string}

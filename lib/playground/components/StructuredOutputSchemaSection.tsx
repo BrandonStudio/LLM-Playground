@@ -38,7 +38,7 @@ export const StructuredOutputSchemaPopover = () => {
   const isSchemaSaved = useCallback(
     (schema: PlaygroundSchema) => {
       return savedSchemas.some(
-        (savedSchema) =>
+        savedSchema =>
           savedSchema.id === schema.id &&
           savedSchema.description === schema.description &&
           JSON.stringify(savedSchema.schema) === JSON.stringify(schema.schema),
@@ -169,7 +169,7 @@ export const StructuredOutputSchemaSection = () => {
   const isSchemaSaved = useCallback(
     (schema: PlaygroundSchema) => {
       return savedSchemas.some(
-        (savedSchema) =>
+        savedSchema =>
           savedSchema.id === schema.id &&
           savedSchema.description === schema.description &&
           JSON.stringify(savedSchema.schema) === JSON.stringify(schema.schema),

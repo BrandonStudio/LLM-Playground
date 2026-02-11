@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { Button } from "@/lib/components/ui/button";
 import { usePlaygroundContext } from "../context";
 import { ChatMessageRole, ChatMessageType, type LLMToolCall } from "@/lib/shared";
@@ -25,6 +26,7 @@ export const GenerationOutput = () => {
     setIsAdded(true);
     if (outputToolCalls.length > 0) {
       addMessage({
+        id: uuidv4(),
         type: ChatMessageType.AssistantToolCall,
         role: ChatMessageRole.Assistant,
         content: output,
@@ -32,6 +34,7 @@ export const GenerationOutput = () => {
       });
     } else {
       addMessage({
+        id: uuidv4(),
         type: ChatMessageType.AssistantText,
         role: ChatMessageRole.Assistant,
         content: output,

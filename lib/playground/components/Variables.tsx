@@ -1,4 +1,5 @@
 import { Divider } from "@/lib/components/ui/divider";
+import type { PromptVariable } from "@/lib/shared";
 
 import { usePlaygroundContext } from "../context";
 import { PromptVariableComponent } from "./PromptVariableComponent";
@@ -18,7 +19,7 @@ export const Variables = () => {
 
   const renderVariables = () => (
     <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden">
-      {promptVariables
+      {(promptVariables as PromptVariable[])
         .slice()
         .sort((a, b) => {
           if (a.isUsed && !b.isUsed) return -1;
