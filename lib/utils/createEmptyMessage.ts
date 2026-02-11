@@ -17,5 +17,5 @@ export function createEmptyMessage(
     type,
     role: role || defaultRole,
     content: content || "",
-  };
+  } as ChatMessageWithId;
 }

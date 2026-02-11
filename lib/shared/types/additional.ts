@@ -44,7 +44,7 @@ export type ClientSideDomainTypes = {
 // Metadata types
 import { z } from "zod";
 
-const jsonSchemaNullable = z.union([
+const jsonSchemaNullable: z.ZodType<any> = z.union([
   z.string(),
   z.number(),
   z.boolean(),
